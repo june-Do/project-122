@@ -39,8 +39,8 @@ function loadList() {
 
     $.ajax({
         type: 'get',
-        // url: `http://localhost:8888/api/articles/${id}/comments`,
-        url: `http://localhost:8888/api/articles/2/comments`,
+        url: `http://localhost:8888/api/articles/${id}/comments`,
+        // url: `http://localhost:8888/api/articles/3/comments`,
         success: function (res) {
             // console.log(res);
 

@@ -10,11 +10,11 @@ function operateData(sql, param) {
             // 数据库的端口
             port: 3306,
             // 数据库名称
-            database: 'project-122',
+            database: 'project_study',
             // 数据库账号
             user: 'root',
             // 数据库密码
-            password: 'root'
+            password: 'dujunqiang'
         })
 
         // 3、执行连接操作
