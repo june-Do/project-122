@@ -13,12 +13,13 @@ var layer = layui.layer;
 var arr = location.href.split('=');
 var id = arr[1];
 
-var str = '<h4><i class="sprites"></i>评论区</h4>';
-//   将遍历封装到外部 
-function each(res) {
-    $.each(res.data, function (index, item) {
-        str +=
-            `
+function loadList() {
+    var str = '<h4><i class="sprites"></i>评论区</h4>';
+    //   将遍历封装到外部 
+    function each(res) {
+        $.each(res.data, function (index, item) {
+            str +=
+                `
             <div class="kr_comment_card">
                 <div class="img-wrap">
                     <img src="./uploads/avatar_3.jpg" alt="">
@@ -30,24 +31,24 @@ function each(res) {
                 <a href="javascript:;" class="like">${item.count}</a>
             </div>
             `
-    })
-}
+        })
+    }
 
-//    2.向服务器发起请求  拿到id所对应的数据库数据 渲染到页面中
-//        封装起来 方便发布新评论时 重新渲染评论区域
-function loadList() {
+    //    2.向服务器发起请求  拿到id所对应的数据库数据 渲染到页面中
+    //        封装起来 方便发布新评论时 重新渲染评论区域
+
     $.ajax({
         type: 'get',
-        url: `http://localhost:8888/api/articles/${id}/comments`,
-        // url: `http://localhost:8888/api/articles/3/comments`,
+        // url: `http://localhost:8888/api/articles/${id}/comments`,
+        url: `http://localhost:8888/api/articles/2/comments`,
         success: function (res) {
             // console.log(res);
 
             if (res.status === 0 && res.message === '查询文章评论成功') {
                 //调用封装的遍历方法
                 each(res);
-                //将字符串形式的str页面结构插入到对应位置
-                $('.kr_panel:eq(1)').append(str)
+                //将字符串形式的str放到.kr_panel:eq(1)中
+                $('.kr_panel:eq(1)').html(str)
             }
         }
     })
@@ -67,16 +68,16 @@ $('#comment-form').on('submit', function (e) {
     // 发送ajax请求
     $.ajax({
         type: 'post',
-        url: `http://localhost:8888/api/articles/${id}/comments`,
-        // url: `http://localhost:8888/api/articles/3/comments`,
+        // url: `http://localhost:8888/api/articles/${id}/comments`,
+        url: `http://localhost:8888/api/articles/2/comments`,
         data: params,
         success: function (res) {
-            layer.msg(res.message)
-            console.log(res);
+            layer.msg(res.message);
+            // console.log(res);
             if (res.status === 0 && res.message === '添加文章评论成功') {
-                $('#comment-form')[0].reset();
-                $('.kr_panel:eq(1)').html('')
-                loadList();
+                $('#comment-form')[0].reset(); //表单重置
+                $('.kr_panel:eq(1)').empty(); //清空内容
+                loadList(); //重新渲染
             }
         }
     })
