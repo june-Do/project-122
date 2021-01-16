@@ -6,7 +6,7 @@ function loadList() {
         type: "get",
         url: "admin/swipers",
         success: function(res) {
-            console.log(res);
+
             if (res.status == 0) {
                 let arr = res.data;
                 let str = "";
@@ -61,8 +61,6 @@ $('tbody').on('click', '.del', function() {
 $('tbody').on('click', 'span', function(e) {
     let data_id = $(this).attr('data-id');
     let status = $(this).attr('data-status');
-
-
     $.ajax({
         type: 'put',
         url: "admin/swipers/" + data_id,
