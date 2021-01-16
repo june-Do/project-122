@@ -17,7 +17,7 @@ $('form').on('submit', function(e) {
             console.log(res);
             if (res.status == 0) {
                 location.href = "/admin/index.html";
-                localStorage.setItem('mytoken', JSON.stringify(res.token))
+                localStorage.setItem('mytoken', res.token);
             } else {
                 $('form')[0].reset();
             }
