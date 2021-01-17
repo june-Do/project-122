@@ -15,7 +15,7 @@ function loadList() {
                     <td>${item.id}</td> 
                     <td>  <img src="http://localhost:8888/uploads/${item.swiperimg}" alt=""></td> 
                     <td> ${item.swiperimg} </td> 
-                    <td> <span data-id="${item.id}" data-status="${item.swiperstatus}" class="layui-badge layui-bg-green"></span></td> 
+                    <td> <span data-id="${item.id}" data-status="${item.swiperstatus}" class="layui-badge layui-bg-green">${item.swiperstatus}</span></td> 
                     <td>
                     <button data-id="${item.id}" type="button" class="layui-btn layui-btn-xs layui-btn-danger del">
                     删除
@@ -80,7 +80,7 @@ $('#uploadSwiper').on('click', function() {
 })
 $('body').on('change', '#myfile', function(e) {
     let files = e.target.files
-    var fd = new FormData()
+    let fd = new FormData()
     $.each(files, function(index, item) {
         fd.append('swipers', item)
     })
